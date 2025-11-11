@@ -16,7 +16,6 @@
             background-color: #dedede;
         }
 
-        /* Header centrado con ancho de 1000px */
         .top-header {
             background-color: #dedede;
             padding: 15px 0;
@@ -42,7 +41,6 @@
             color: #666;
         }
 
-        /* Barra roja centrada con ancho de 1000px */
         .main-nav {
             background-color: #dedede;
             display: flex;
@@ -69,7 +67,6 @@
             opacity: 0.8;
         }
 
-        /* Contenedor centrado */
         .hero-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -101,7 +98,7 @@
 <body>
     <div class="top-header">
         <div class="top-header-content">
-            <img src="/static/img/logolargo.jpg" alt="Editora Perú" class="logo-main">
+            <img src="{{ url_for('static', filename='img/logolargo.jpg') }}" alt="Editora Perú" class="logo-main">
             <span class="header-title">EMPRESA PERUANA DE SERVICIOS EDITORIALES S.A.</span>
         </div>
     </div>
@@ -118,7 +115,7 @@
     </nav>
 
     <div class="hero-container">
-        <img src="/static/img/fondo.jpg" alt="Editora Perú" class="hero-image">
+        <img src="{{ url_for('static', filename='img/fondo.jpg') }}" alt="Editora Perú" class="hero-image">
     </div>
 
     <footer class="footer">
