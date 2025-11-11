@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifas - Editora Perú</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-main {
+            height: 40px;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Navegación */
+        .main-nav {
+            background-color: #e31e24;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-content a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 0;
+            display: inline-block;
+            font-size: 13px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-content a:hover {
+            opacity: 0.8;
+        }
+
+        /* Contenido Principal */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+
+        /* Sección de Tarifas */
+        .tarifas-section {
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tarifas-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb span {
+            color: #e31e24;
+        }
+
+        .category-group {
+            margin-bottom: 35px;
+        }
+
+        .category-header {
+            color: #e31e24;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-item {
+            padding: 10px 0;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .service-item:hover {
+            color: #e31e24;
+            padding-left: 10px;
+            border-bottom-color: #f0f0f0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 40px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-logo img {
+            height: 80px;
+        }
+
+        .sidebar-company {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li:hover {
+            background-color: #f9f9f9;
+            color: #e31e24;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #e31e24;
+            color: white;
+            padding: 25px 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content p {
+            margin: 8px 0;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Editora Perú" class="logo-main">
+                <span class="header-subtitle">Empresa Peruana de Servicios Editoriales S.A.</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="/">INICIO</a>
+            <a href="#reseña">Reseña</a>
+            <a href="#productos">Productos</a>
+            <a href="/tarifas">TARIFAS</a>
+            <a href="#estructura">Estructura</a>
+            <a href="#codigo">Código de ética</a>
+            <a href="#atencion">Atención al ciudadano</a>
+            <a href="#preguntas">Preguntas frecuentes</a>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="main-content">
+        <!-- Sección de Tarifas -->
+        <div class="tarifas-section">
+            <h1 class="tarifas-title">TARIFAS</h1>
+            <div class="breadcrumb">
+                LA EMPRESA | <span>Gestión Comercial</span>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 40px;">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Editora Perú" style="height: 60px;">
+                <div style="width: 2px; height: 40px; background: #e31e24;"></div>
+            </div>
+
+            <!-- Servicio de Publicidad -->
+            <div class="category-group">
+                <h2 class="category-header">Servicio de Publicidad</h2>
+                <ul class="service-list">
+                    <li class="service-item" onclick="irAPago('Requisitos para publicar en el Boletín Oficial', '85.00')">
+                        Requisitos para publicar en el Boletín Oficial
+                    </li>
+                    <li class="service-item" onclick="irAPago('Requisitos para publicar en la Separata de Normas Legales', '120.00')">
+                        Requisitos para publicar en la Separata de Normas Legales
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa Comercial Cuerpo Noticioso', '250.00')">
+                        Tarifa Comercial Cuerpo Noticioso
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa Comercial Normas Legales', '180.00')">
+                        Tarifa Comercial Normas Legales
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa Avisaje Legal Normas Legales', '95.00')">
+                        Tarifa Avisaje Legal Normas Legales
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa digital Normas Legales Municipalidades de Lima y Callao', '145.00')">
+                        Tarifa digital Normas Legales Municipalidades de Lima y Callao
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa Avisaje Legal Boletín Oficial', '110.00')">
+                        Tarifa Avisaje Legal Boletín Oficial
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa Comercial Suplementos Autofinanciados', '320.00')">
+                        Tarifa Comercial Suplementos Autofinanciados
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifas en Páginas web Diario El Peruano y Agencia de Noticias Andina', '280.00')">
+                        Tarifas en Páginas web Diario El Peruano y Agencia de Noticias Andina
+                    </li>
+                    <li class="service-item" onclick="irAPago('Servicio Emailing y Posteo en Redes Sociales', '150.00')">
+                        Servicio Emailing y Posteo en Redes Sociales
+                    </li>
+                    <li class="service-item" onclick="irAPago('Tarifa Separata de Declaración Jurada', '75.00')">
+                        Tarifa Separata de Declaración Jurada
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Servicios de Eventos Digitales -->
+            <div class="category-group">
+                <h2 class="category-header">Servicios de Eventos Digitales</h2>
+                <ul class="service-list">
+                    <li class="service-item" onclick="irAPago('Servicios para Eventos Empresariales', '850.00')">
+                        Servicios para Eventos Empresariales
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Servicios Editoriales y Gráficos -->
+            <div class="category-group">
+                <h2 class="category-header">Servicios Editoriales y Gráficos</h2>
+                <ul class="service-list">
+                    <li class="service-item" onclick="irAPago('Servicios Gráficos', '450.00')">
+                        Servicios Gráficos
+                    </li>
+                    <li class="service-item" onclick="irAPago('Venta de Libros', '65.00')">
+                        Venta de Libros
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Venta de periódicos y suscripciones -->
+            <div class="category-group">
+                <h2 class="category-header">Venta de periódicos y suscripciones</h2>
+                <ul class="service-list">
+                    <li class="service-item" onclick="irAPago('Venta de periódicos', '5.00')">
+                        Venta de periódicos
+                    </li>
+                    <li class="service-item" onclick="irAPago('Suscripciones', '380.00')">
+                        Suscripciones
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Productos y Servicios del Centro de Documentación -->
+            <div class="category-group">
+                <h2 class="category-header">Productos y Servicios del Centro de Documentación</h2>
+                <ul class="service-list">
+                    <li class="service-item" onclick="irAPago('Tarifas', '35.00')">
+                        Tarifas
+                    </li>
+                    <li class="service-item" onclick="irAPago('Licencia de uso de Fotos y Videos', '125.00')">
+                        Licencia de uso de Fotos y Videos
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="{{ url_for('static', filename='img/logito.jpg') }}" alt="Editora Perú">
+            </div>
+            <div class="sidebar-company">
+                <strong>Empresa Peruana</strong><br>
+                de Servicios Editoriales
+            </div>
+            <ul class="sidebar-menu">
+                <li>Perfil del lector</li>
+                <li>Suscripciones</li>
+                <li>Tarifas</li>
+                <li>Red de Distribuidores</li>
+                <li>Zonas Recepción</li>
+                <li>Publicaciones Oficiales</li>
+                <li>Mapa de cumplimiento</li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Empresa Peruana de Servicios Editoriales S.A.</strong> Av. Alfonso Ugarte 873, Lima 1 - Perú</p>
+            <p>(051-1) 315-0400 - Escríbenos al WhatsApp 915-248103</p>
+            <p>Responsable Portal Transparencia: Victor Hugo Colina Lama</p>
+            <p>Responsable Entrega Información Transparencia: Jhony Alex Chuquipoma Facho</p>
+            <p>Diseñado y desarrollado por Editora Perú</p>
+        </div>
+    </footer>
+
+    <script>
+        function irAPago(servicio, precio) {
+            window.location.href = `/pago?servicio=${encodeURIComponent(servicio)}&precio=${precio}`;
+        }
+    </script>
+</body>
+</html>

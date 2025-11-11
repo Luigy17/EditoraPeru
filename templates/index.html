@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editora Perú</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #dedede;
+        }
+
+        /* Header centrado con ancho de 1000px */
+        .top-header {
+            background-color: #dedede;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .top-header-content {
+            width: 1000px;
+            background-color: #dedede;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-main {
+            height: 45px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Barra roja centrada con ancho de 1000px */
+        .main-nav {
+            background-color: #dedede;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-content {
+            width: 1000px;
+            background-color: #e31e24;
+            padding: 0 30px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-content a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 0;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .nav-content a:hover {
+            opacity: 0.8;
+        }
+
+        /* Contenedor centrado */
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #dedede;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 1000px;
+            height: 500px;
+            display: block;
+        }
+
+        .footer {
+            background-color: #e31e24;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header">
+        <div class="top-header-content">
+            <img src="/static/img/logolargo.jpg" alt="Editora Perú" class="logo-main">
+            <span class="header-title">EMPRESA PERUANA DE SERVICIOS EDITORIALES S.A.</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="/">INICIO</a>
+            <a href="#quienes">QUIENES SOMOS</a>
+            <a href="#productos">PRODUCTOS</a>
+            <a href="/tarifas">TARIFAS</a>
+            <a href="#mesa">MESA DE PARTES VIRTUAL</a>
+            <a href="#transparencia">PORTAL DE TRANSPARENCIA</a>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <img src="/static/img/fondo.jpg" alt="Editora Perú" class="hero-image">
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Empresa Peruana de Servicios Editoriales S.A.</strong> Av. Alfonso Ugarte 873, Lima 1 - Perú</p>
+            <p>(051-1) 315-0400 - Escríbenos al WhatsApp 915-248103</p>
+        </div>
+    </footer>
+</body>
+</html>

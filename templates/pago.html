@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Pago - Editora Perú</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Editora Perú" class="logo-large">
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="/">INICIO</a>
+            <a href="/#reseña">Reseña</a>
+            <a href="/#productos">Productos</a>
+            <a href="/tarifas">TARIFAS</a>
+            <a href="/#estructura">Estructura</a>
+            <a href="/#codigo">Código de ética</a>
+            <a href="/#atencion">Atención al ciudadano</a>
+            <a href="/#preguntas">Preguntas frecuentes</a>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main style="padding: 40px 20px; min-height: 70vh;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <!-- Breadcrumb -->
+            <div style="margin-bottom: 30px; font-size: 13px; color: #666;">
+                <a href="/" style="color: #e31e24; text-decoration: none;">Tarifas</a> / <span>Realizar Pago</span>
+            </div>
+
+            <!-- Título -->
+            <h1 style="font-size: 32px; color: #333; margin-bottom: 10px;">Realizar Pago</h1>
+            <p style="color: #666; margin-bottom: 40px;">Complete la información para procesar su pago</p>
+
+            <!-- Resumen del Servicio -->
+            <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px;">
+                <h2 style="font-size: 18px; color: #e31e24; margin-bottom: 20px;">Resumen del Servicio</h2>
+                <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+                    <span style="color: #666;">Servicio:</span>
+                    <span style="font-weight: 600; color: #333;">{{ servicio }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 2px solid #e31e24;">
+                    <span style="color: #666;">Precio:</span>
+                    <span style="font-weight: 600; color: #333;">S/ {{ precio }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 20px 0 0;">
+                    <span style="font-size: 20px; font-weight: 600; color: #333;">Total a Pagar:</span>
+                    <span style="font-size: 24px; font-weight: 700; color: #e31e24;">S/ {{ precio }}</span>
+                </div>
+            </div>
+
+            <!-- Métodos de Pago -->
+            <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                <h2 style="font-size: 18px; color: #e31e24; margin-bottom: 20px;">Selecciona tu método de pago</h2>
+                
+                <div class="payment-options" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                    <div class="payment-option" data-method="card" style="border: 2px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Tarjeta" style="height: 30px; margin-bottom: 10px;">
+                        <div style="font-size: 13px; color: #666;">Tarjeta</div>
+                    </div>
+                    <div class="payment-option" data-method="yape" style="border: 2px solid #ddd; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s;">
+                        <img src="https://seeklogo.com/images/Y/yape-logo-0AB0E0D7EA-seeklogo.com.png" alt="Yape" style="height: 35px; margin-bottom: 5px;">
+                        <div style="font-size: 13px; color: #666;">Yape</div>
+                    </div>
+                </div>
+
+                <!-- Formulario de Tarjeta -->
+                <form id="paymentForm" class="card-form" style="display: none;">
+                    <div style="background: #f0f8ff; padding: 15px; border-radius: 6px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#0066cc">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                        </svg>
+                        <p style="font-size: 12px; color: #666; margin: 0;">Tus datos están protegidos con encriptación SSL de 256 bits</p>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: #333;">Número de Tarjeta</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                        <div style="display: flex; gap: 8px; margin-top: 10px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" style="height: 20px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard" style="height: 20px;">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: #333;">Nombre del Titular</label>
+                        <input type="text" id="cardHolder" placeholder="NOMBRE APELLIDO" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; text-transform: uppercase;">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: #333;">Fecha de Vencimiento</label>
+                            <input type="text" id="expiry" placeholder="MM/AA" maxlength="5" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: #333;">CVV</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                        </div>
+                    </div>
+
+                    <button type="submit" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #e31e24 0%, #b71c1c 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                        Pagar S/ {{ precio }}
+                    </button>
+                </form>
+
+                <!-- Sección de Yape -->
+                <div class="yape-section" style="display: none; text-align: center;">
+                    <h3 style="margin-bottom: 20px; font-size: 16px; color: #333;">Escanea el código QR con tu app Yape</h3>
+                    <div class="yape-qr" style="max-width: 250px; margin: 20px auto; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+                        <!-- QR se generará dinámicamente -->
+                    </div>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: left; margin-bottom: 20px;">
+                        <ol style="margin-left: 20px; font-size: 14px; line-height: 2;">
+                            <li>Abre tu app de Yape</li>
+                            <li>Escanea el código QR</li>
+                            <li>Confirma el monto de S/ {{ precio }}</li>
+                            <li>Completa el pago</li>
+                        </ol>
+                    </div>
+                    <button type="button" onclick="confirmarPagoYape()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #e31e24 0%, #b71c1c 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                        Ya realicé el pago
+                    </button>
+                </div>
+
+                <!-- Botón Volver -->
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="/tarifas" style="color: #e31e24; text-decoration: none; font-size: 14px;">← Volver a Tarifas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.95); align-items: center; justify-content: center; flex-direction: column; z-index: 9999;">
+            <div style="border: 4px solid #f3f3f3; border-top: 4px solid #e31e24; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
+            <p style="margin-top: 20px; color: #666; font-size: 14px;">Procesando tu pago...</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Empresa Peruana de Servicios Editoriales S.A.</strong> Av. Alfonso Ugarte 873, Lima 1 - Perú</p>
+            <p>(051-1) 315-0400 - Escríbenos al WhatsApp 915-248103</p>
+            <p>Diseñado y desarrollado por Editora Perú</p>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .payment-option:hover {
+            border-color: #e31e24 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(227, 30, 36, 0.15);
+        }
+
+        .payment-option.selected {
+            border-color: #e31e24 !important;
+            background: #fff5f5;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e31e24 !important;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+        }
+
+        .main-header {
+            background-color: #e31e24;
+            padding: 10px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            background: white;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        .logo-large {
+            height: 30px;
+            width: auto;
+        }
+
+        .main-nav {
+            background-color: #e31e24;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-content a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 0;
+            display: inline-block;
+            font-size: 13px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-content a:hover {
+            opacity: 0.8;
+        }
+
+        .footer {
+            background-color: #e31e24;
+            color: white;
+            padding: 25px 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content p {
+            margin: 8px 0;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+    </style>
+
+    <script>
+        const servicioActual = "{{ servicio }}";
+        const precioActual = parseFloat("{{ precio }}");
+
+        // Selección de método de pago
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const method = this.dataset.method;
+                
+                if (method === 'card') {
+                    document.querySelector('.card-form').style.display = 'block';
+                    document.querySelector('.yape-section').style.display = 'none';
+                } else if (method === 'yape') {
+                    document.querySelector('.card-form').style.display = 'none';
+                    document.querySelector('.yape-section').style.display = 'block';
+                    generarQRYape();
+                }
+            });
+        });
+
+        // Formateo de número de tarjeta
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Formateo de fecha de expiración
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Validación de CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+        });
+
+        // Procesar pago con tarjeta
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const cardHolder = document.getElementById('cardHolder').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (cardNumber.length < 13 || cardNumber.length > 19) {
+                alert('Número de tarjeta inválido');
+                return;
+            }
+
+            if (!expiry.match(/^\d{2}\/\d{2}$/)) {
+                alert('Fecha de expiración inválida (MM/AA)');
+                return;
+            }
+
+            if (cvv.length < 3 || cvv.length > 4) {
+                alert('CVV inválido');
+                return;
+            }
+
+            mostrarLoading();
+
+            try {
+                const response = await fetch('/procesar-pago', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        metodo: 'tarjeta',
+                        servicio: servicioActual,
+                        monto: precioActual,
+                        datos_tarjeta: {
+                            numero: cardNumber,
+                            titular: cardHolder,
+                            expiracion: expiry,
+                            cvv: cvv
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                ocultarLoading();
+
+                if (data.success) {
+                    alert(`✅ ¡PAGO REALIZADO CORRECTAMENTE!\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📝 Número de Operación:\n   ${data.numero_operacion}\n\n🏷️ Servicio:\n   ${servicioActual}\n\n💰 Monto Pagado:\n   S/ ${precioActual.toFixed(2)}\n\n📅 Fecha:\n   ${data.fecha}\n\n✉️ Se ha enviado un comprobante\n   a tu correo electrónico.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n\nGracias por tu preferencia.`);
+                    window.location.href = '/tarifas';
+                } else {
+                    alert('Error al procesar el pago: ' + (data.error || 'Error desconocido'));
+                }
+            } catch (error) {
+                ocultarLoading();
+                console.error('Error:', error);
+                alert('Error de conexión. Por favor intenta nuevamente.');
+            }
+        });
+
+        // Confirmar pago Yape
+        async function confirmarPagoYape() {
+            mostrarLoading();
+
+            try {
+                const response = await fetch('/procesar-pago', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        metodo: 'yape',
+                        servicio: servicioActual,
+                        monto: precioActual
+                    })
+                });
+
+                const data = await response.json();
+            ocultarLoading();
+
+            if (data.success) {
+                alert(`✅ ¡PAGO REALIZADO CORRECTAMENTE!\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📝 Número de Operación:\n   ${data.numero_operacion}\n\n🏷️ Servicio:\n   ${servicioActual}\n\n💰 Monto Pagado:\n   S/ ${precioActual.toFixed(2)}\n\n📅 Fecha:\n   ${data.fecha}\n\n✉️ Se ha enviado un comprobante\n   a tu correo electrónico.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n\nGracias por tu preferencia.`);
+                window.location.href = '/tarifas';
+            } else {
+                alert('Error al procesar el pago: ' + (data.error || 'Error desconocido'));
+            }
+            } catch (error) {
+                ocultarLoading();
+                console.error('Error:', error);
+                alert('Error de conexión. Por favor intenta nuevamente.');
+            }
+        }
+
+        // Generar QR de Yape
+        function generarQRYape() {
+            const qrContainer = document.querySelector('.yape-qr');
+            qrContainer.innerHTML = `
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <rect width="200" height="200" fill="white"/>
+                    <text x="100" y="90" text-anchor="middle" fill="#722F8D" font-size="18" font-weight="bold">
+                        YAPE
+                    </text>
+                    <text x="100" y="110" text-anchor="middle" fill="#722F8D" font-size="14">
+                        Editora Perú
+                    </text>
+                    <text x="100" y="130" text-anchor="middle" fill="#e31e24" font-size="20" font-weight="bold">
+                        S/ ${precioActual.toFixed(2)}
+                    </text>
+                </svg>
+            `;
+        }
+
+        function mostrarLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function ocultarLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
